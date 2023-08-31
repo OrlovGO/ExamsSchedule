@@ -1,0 +1,15 @@
+{% extends 'reg/base.html' %}
+{% block content %}
+    <h1>Log in to your account</h1>
+    <hr>
+
+    {% if form.errors %}
+        <p>{{ form.errors.error }}</p>>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {{form}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Log in</button>
+    </form>
+{% endblock %}

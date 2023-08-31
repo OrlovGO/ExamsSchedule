@@ -1,0 +1,73 @@
+{% extends 'reg/base.html' %}
+{% block content %}
+    <h1>Расписание экзаменов</h1>
+    <hr>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+
+    <table class="table table-bordered">
+    <h2>Тесты</h2>
+      <tr>
+        <th>Дата</th>
+        <th>Время</th>
+        <th>Предмет.</th>
+        <th>Мин балл</th>
+        <th>Адрес</th>
+        <th>Файл</th>
+      </tr>
+        {% for el in schedule %}
+        {% if el.exam.type == 'test' %}
+          <tr>
+            <td>{{ el.date }}</td>
+            <td>{{ el.time }}</td><td>{{ el.exam.subjects }}</td><td>{{ el.exam.score_min }}</td><td>{{ el.address }}</td><td>{{ el.exam.program }}</td>
+          </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+
+ <table class="table table-bordered">
+    <h2>Собеседования</h2>
+      <tr>
+        <th>Дата</th>
+        <th>Время</th>
+        <th>Предмет.</th>
+        <th>Мин балл</th>
+        <th>Адрес</th>
+        <th>Файл</th>
+      </tr>
+        {% for el in schedule %}
+        {% if el.exam.type == 'interview' %}
+          <tr>
+            <td>{{ el.date }}</td>
+            <td>{{ el.time }}</td><td>{{ el.exam.subjects }}</td><td>{{ el.exam.score_min }}</td><td>{{ el.address }}</td><td>{{ el.exam.program }}</td>
+          </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+
+ <table class="table table-bordered">
+    <h2>Творческие испытания</h2>
+      <tr>
+        <th>Дата</th>
+        <th>Время</th>
+        <th>Предмет.</th>
+        <th>Мин балл</th>
+        <th>Адрес</th>
+        <th>Файл</th>
+      </tr>
+        {% for el in schedule %}
+        {% if el.exam.type == 'creative_test' %}
+          <tr>
+            <td>{{ el.date }}</td>
+            <td>{{ el.time }}</td><td>{{ el.exam.subjects }}</td><td>{{ el.exam.score_min }}</td><td>{{ el.address }}</td><td>{{ el.exam.program }}</td>
+          </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+{% endblock %}
